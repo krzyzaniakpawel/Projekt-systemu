@@ -1,0 +1,200 @@
+/* File: resources/css/app.css */
+
+/* Reset / Normalize */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f7f9fc;
+  color: #0a2540;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #0a2540;
+  color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar a {
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 1rem;
+  font-weight: 500;
+}
+
+/* Cards */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Match Result */
+.match {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.match .team {
+  flex: 1;
+  text-align: center;
+}
+
+.match .score {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Standings Table */
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.standings-table th,
+.standings-table td {
+  padding: 0.75rem;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.standings-table th {
+  background: #0a2540;
+  color: white;
+  font-weight: 600;
+}
+
+/* .standings-table tr:nth-child(1) td {
+  background: #d4edda;
+}
+
+.standings-table tr:nth-child(2) td {
+  background: #e2f0d9;
+}
+
+.standings-table tr:nth-child(3) td {
+  background: #fef9c3;
+}
+
+.standings-table tr:last-child td {
+  background: #f8d7da;
+} */
+
+/* Utilities */
+.text-center {
+  text-align: center;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mt-5 {
+  margin-top: 2rem !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .match {
+    flex-direction: column;
+  }
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navbar a {
+    margin: 0.5rem 0;
+  }
+}
+
+/* Card with shadow and rounded corners for main info panels */
+.info-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px #e0e0e0;
+  padding: 2.5rem 3rem;
+  min-width: 350px;
+  max-width: 700px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
+@media (max-width: 700px) {
+  .info-card {
+    flex-direction: column !important;
+    gap: 1.2rem !important;
+    padding: 1.2rem 0.5rem !important;
+    min-width: 0 !important;
+    max-width: 98vw !important;
+  }
+}
+
+@media (max-width: 700px) {
+    .match-card-flex {
+        flex-direction: column !important;
+        gap: 1.2rem !important;
+        padding: 1.2rem 0.5rem !important;
+        min-width: 0 !important;
+        max-width: 98vw !important;
+    }
+    .match-card-club,
+    .match-card-center {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    .match-card-club {
+        order: unset !important;
+    }
+    .match-card-center {
+        order: 2 !important;
+        margin-bottom: 1rem;
+    }
+    .match-card-club.club1 {
+        order: 1 !important;
+    }
+    .match-card-club.club2 {
+        order: 3 !important;
+    }
+}
