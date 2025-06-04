@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/player_details/{id}', [PlayerController::class, 'show'])->name('player_details');
     Route::get('/favourite_clubs', [FavouriteClubsController::class, 'index'])->name('favourite_clubs');
     Route::get('/match_details/{id}', [MatchController::class, 'show'])->name('match_details');
+    Route::get('/matches', [\App\Http\Controllers\MatchesController::class, 'index'])->name('matches');
 
     Route::post('/favourite_clubs/add', [FavouriteClubsController::class, 'add'])->name('favourite_clubs.add');
     Route::post('/favourite_clubs/remove', [FavouriteClubsController::class, 'remove'])->name('favourite_clubs.remove');

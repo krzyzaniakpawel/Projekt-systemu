@@ -114,6 +114,7 @@ CREATE TABLE Matches (
     club_fouls_2 NUMBER,
     club_passes_1 NUMBER,
     club_passes_2 NUMBER,
+    match_date DATE NOT NULL,
     FOREIGN KEY (league_id) REFERENCES Leagues(league_id),
     FOREIGN KEY (club_1_id) REFERENCES Clubs(club_id),
     FOREIGN KEY (club_2_id) REFERENCES Clubs(club_id)
