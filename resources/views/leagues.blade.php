@@ -7,7 +7,7 @@
   <table class="standings-table">
     <thead>
       <tr>
-        <th>Logo</th>
+        <th></th>
         <th>Nazwa</th>
         <th>Kraj</th>
       </tr>

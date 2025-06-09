@@ -30,6 +30,8 @@
         </tbody>
     </table>
 
+    {{ $upcomingMatches->withQueryString()->links('pagination::default') }}
+
     <h2 class="mt-5">Zakończone mecze</h2>
     <table class="standings-table">
         <thead>
@@ -65,6 +67,8 @@
             @endforelse
         </tbody>
     </table>
+
+    {{ $pastMatches->withQueryString()->links('pagination::default') }}
 </div>
 
 @endsection

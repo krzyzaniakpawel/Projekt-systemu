@@ -26,7 +26,7 @@ class MatchesController extends Controller
             )
             ->whereDate('Matches.match_date', '>=', $today)
             ->orderBy('Matches.match_date', 'asc')
-            ->get();
+            ->paginate(5, ['*'], 'upcoming_page'); // 10 na stronę, możesz zmienić
 
         // Zakończone mecze: data meczu < dziś
         $pastMatches = DB::table('Matches')
@@ -41,7 +41,7 @@ class MatchesController extends Controller
             )
             ->whereDate('Matches.match_date', '<', $today)
             ->orderBy('Matches.match_date', 'desc')
-            ->get();
+            ->paginate(5, ['*'], 'past_page'); // 10 na stronę, możesz zmienić
 
         return view('matches', compact('upcomingMatches', 'pastMatches'));
     }

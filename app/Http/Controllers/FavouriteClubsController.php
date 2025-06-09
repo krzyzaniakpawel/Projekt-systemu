@@ -16,7 +16,7 @@ class FavouriteClubsController extends Controller
             ->join('Clubs as c', 'f.club_id', '=', 'c.club_id')
             ->select('c.name', 'c.club_id')
             ->where('f.user_id', $userId)
-            ->get();
+            ->paginate(10); // 10 na stronę
 
         return view('favourite_clubs', compact('favouriteClubs'));
     }

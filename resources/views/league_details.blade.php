@@ -10,15 +10,14 @@
   <table class="standings-table">
     <thead>
       <tr>
-        <th>#</th>
-        <th>Herb</th>
+        <th></th>
+        <th></th>
         <th>Klub</th>
-        <th>MP</th>
-        <th>W</th>
+        <th>M</th>
+        <th>Z</th>
         <th>R</th>
         <th>P</th>
-        <th>BZ</th>
-        <th>BS</th>
+        <th>B</th>
         <th>RB</th>
         <th>PKT</th>
         <th>Ulubione</th> <!-- Dodaj tę kolumnę -->
@@ -40,8 +39,7 @@
           <td>{{ $team->wins }}</td>
           <td>{{ $team->draws }}</td>
           <td>{{ $team->losses }}</td>
-          <td>{{ $team->goals_for }}</td>
-          <td>{{ $team->goals_against }}</td>
+          <td>{{ $team->goals_for }} : {{ $team->goals_against }}</td>
           <td>{{ $team->goals_for - $team->goals_against }}</td>
           <td>{{ $team->points }}</td>
           <td>

@@ -54,8 +54,7 @@ class ClubController extends Controller
             })
             ->where('m.match_date', '>=', now())
             ->orderBy('m.match_date', 'asc')
-            ->limit(10)
-            ->get();
+            ->paginate(5, ['*'], 'upcoming_page');
 
         // Przeszłe mecze (data w przeszłości)
         $pastMatches = DB::table('Matches as m')
@@ -78,8 +77,7 @@ class ClubController extends Controller
             })
             ->where('m.match_date', '<', now())
             ->orderByDesc('m.match_date')
-            ->limit(10)
-            ->get();
+            ->paginate(5, ['*'], 'past_page');
 
         return view('club_details', compact('club', 'players', 'upcomingMatches', 'pastMatches'));
     }
