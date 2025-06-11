@@ -33,14 +33,14 @@ RUN mkdir /opt/oracle \
     && ldconfig
 
 # Configure Oracle
-RUN apt-get update \
-    && apt-get install -y \
-      php-dev \
-      php-pear \
-      build-essential \
-      libaio1 \
-      libaio-dev \
-      freetds-dev
+# RUN apt-get update \
+#     && apt-get install -y \
+#       php-dev \
+#       php-pear \
+#       build-essential \
+#       libaio1 \
+#       libaio-dev \
+#       freetds-dev
 RUN pecl channel-update pecl.php.net \
     && echo 'instantclient,/opt/oracle/instantclient_19_10' | pecl install oci8 \
     && echo extension=oci8.so >> /etc/php/8.2/cli/php.ini \
