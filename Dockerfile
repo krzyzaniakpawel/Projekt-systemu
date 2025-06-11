@@ -1,4 +1,4 @@
-FROM php:8.1-cli
+FROM ubuntu:22.04
 
 RUN apt-get update \
     && apt-get install -y gnupg gosu curl wget ca-certificates zip unzip git supervisor sqlite3 libcap2-bin libpng-dev python2 dnsutils \
