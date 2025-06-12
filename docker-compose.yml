@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+   oracledb:
+     image: wnameless/oracle-xe-11g-r2
+     ports:
+      - "1521:1521"
+
+   php7-with-oci8:
+     depends_on:
+       - oracledb
+     image: php82
+     volumes:
+      - ./www:/var/www/html
+     ports:
+      - "8181:80"
+
