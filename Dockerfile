@@ -22,7 +22,32 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     curl \
-    && docker-php-ext-install pdo pdo_mysql zip bcmath
+    wget \
+    && docker-php-ext-install pdo zip bcmath
+
+# Instalacja Oracle Instant Client i oci8
+# RUN apt-get update && apt-get install -y libaio1 wget unzip && \
+#     mkdir -p /opt/oracle && \
+#     cd /opt/oracle && \
+#     wget https://download.oracle.com/otn_software/linux/instantclient/instantclient-basiclite-linux.x64-21.13.0.0.0dbru.zip && \
+#     unzip instantclient-basiclite-linux.x64-21.13.0.0.0dbru.zip && \
+#     rm instantclient-basiclite-linux.x64-21.13.0.0.0dbru.zip && \
+#     echo /opt/oracle/instantclient_21_13 > /etc/ld.so.conf.d/oracle-instantclient.conf && \
+#     ldconfig
+
+# Rozpakuj i skonfiguruj Instant Client
+RUN apt-get update && apt-get install -y libaio1 unzip && \
+    cd /opt/oracle && \
+    wget https://download.oracle.com/otn_software/linux/instantclient/2380000/instantclient-basic-linux.x64-23.8.0.25.04.zip && \
+    wget https://download.oracle.com/otn_software/linux/instantclient/2380000/instantclient-sdk-linux.x64-23.8.0.25.04.zip && \
+    unzip instantclient-basic-linux.x64-*.zip && \
+    unzip instantclient-sdk-linux.x64-*.zip && \
+    rm *.zip && \
+    echo /opt/oracle/instantclient_* > /etc/ld.so.conf.d/oracle-instantclient.conf && \
+    ldconfig
+
+RUN echo 'instantclient,/opt/oracle/instantclient_23_8' | pecl install oci8 && \
+    docker-php-ext-enable oci8
 
 # Instalacja Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
