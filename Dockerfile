@@ -1,58 +1,55 @@
-FROM php:8.1-cli
+# Etap 1: Budowanie assets (JS, CSS) z Node.js
+FROM node:18 AS frontend
 
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build
+
+# Etap 2: PHP + Laravel + Apache
+FROM php:8.2-apache
+
+# Instalacja zależności PHP i narzędzi
 RUN apt-get update && apt-get install -y \
-    unzip \
-    libaio1 \
-    wget \
     git \
-    gnupg2 \
+    unzip \
+    libzip-dev \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    libzip-dev \
     zip \
     curl \
-    && docker-php-ext-install pdo mbstring zip xml
+    && docker-php-ext-install pdo pdo_mysql zip bcmath
 
-ENV LD_LIBRARY_PATH="/opt/oracle/instantclient_19_10/"
-ENV ORACLE_HOME="/opt/oracle/instantclient_19_10/"
-ENV OCI_HOME="/opt/oracle/instantclient_19_10/"
-ENV OCI_LIB_DIR="/opt/oracle/instantclient_19_10/"
-ENV OCI_INCLUDE_DIR="/opt/oracle/instantclient_19_10/sdk/include"
-ENV OCI_VERSION=19
+# Instalacja Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Download Oracle
-RUN mkdir /opt/oracle \
-    && cd /opt/oracle \
-    && wget https://download.oracle.com/otn_software/linux/instantclient/191000/instantclient-basic-linux.x64-19.10.0.0.0dbru.zip \
-    && wget https://download.oracle.com/otn_software/linux/instantclient/191000/instantclient-sdk-linux.x64-19.10.0.0.0dbru.zip \
-    && unzip /opt/oracle/instantclient-basic-linux.x64-19.10.0.0.0dbru.zip -d /opt/oracle \
-    && unzip /opt/oracle/instantclient-sdk-linux.x64-19.10.0.0.0dbru.zip -d /opt/oracle \
-    && rm -rf /opt/oracle/*.zip \
-    && echo /opt/oracle/instantclient_19_10 > /etc/ld.so.conf.d/oracle-instantclient.conf \
-    && ldconfig
+# Konfiguracja Apache
+RUN a2enmod rewrite
+COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
 
-# Configure Oracle
-# RUN apt-get update \
-#     && apt-get install -y \
-#       php-dev \
-#       php-pear \
-#       build-essential \
-#       libaio1 \
-#       libaio-dev \
-#       freetds-dev
-RUN pecl channel-update pecl.php.net \
-    && echo 'instantclient,/opt/oracle/instantclient_19_10' | pecl install oci8 \
-    && echo extension=oci8.so >> /etc/php/8.2/cli/php.ini \
-    && echo "extension=oci8.so" >> /etc/php/8.2/mods-available/oci8.ini
+# Ustaw katalog roboczy
+WORKDIR /var/www/html
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-WORKDIR /var/www
+# Skopiuj aplikację
 COPY . .
 
+# Skopiuj zbudowane assets z etapu 1
+COPY --from=frontend /app/public/build ./public/build
+
+# Instalacja zależności PHP (Laravel)
 RUN composer install --no-dev --optimize-autoloader
 
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+# Prawa do storage, bootstrap itd.
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 storage bootstrap/cache
 
-CMD php artisan serve --host=0.0.0.0 --port=8000
+# Ustaw zmienną środowiskową do środowiska produkcyjnego
+ENV APP_ENV=production
+
+EXPOSE 80
+
+CMD ["apache2-foreground"]
