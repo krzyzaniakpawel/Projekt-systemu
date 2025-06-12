@@ -43,8 +43,7 @@ RUN apt-get update && apt-get install -y libaio1 unzip && \
     unzip instantclient-basic-linux.x64-*.zip && \
     unzip instantclient-sdk-linux.x64-*.zip && \
     rm *.zip && \
-    echo /opt/oracle/instantclient_* > /etc/ld.so.conf.d/oracle-instantclient.conf && \
-    ldconfig
+    echo /opt/oracle/instantclient_* > /etc/ld.so.conf.d/oracle-instantclient.conf
 
 RUN echo 'instantclient,/opt/oracle/instantclient_23_8' | pecl install oci8 && \
     docker-php-ext-enable oci8
