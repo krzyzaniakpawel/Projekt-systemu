@@ -13,14 +13,14 @@
         <th></th>
         <th></th>
         <th>Klub</th>
-        <th>M</th>
-        <th>Z</th>
-        <th>R</th>
-        <th>P</th>
-        <th>B</th>
-        <th>RB</th>
+        <th class="col-hide-600 col-matches">M</th>
+        <th class="col-hide-600">Z</th>
+        <th class="col-hide-600">R</th>
+        <th class="col-hide-600">P</th>
+        <th class="col-hide-600 col-goals">B</th>
+        <th class="col-hide-600">RB</th>
         <th>PKT</th>
-        <th>Ulubione</th> <!-- Dodaj tę kolumnę -->
+        <th>Ulubione</th>
       </tr>
     </thead>
     <tbody>
@@ -35,12 +35,12 @@
             @endif
           </td>
           <td>{{ $team->name }}</td>
-          <td>{{ $team->matches_played }}</td>
-          <td>{{ $team->wins }}</td>
-          <td>{{ $team->draws }}</td>
-          <td>{{ $team->losses }}</td>
-          <td>{{ $team->goals_for }} : {{ $team->goals_against }}</td>
-          <td>{{ $team->goals_for - $team->goals_against }}</td>
+          <td class="col-hide-600 col-matches">{{ $team->matches_played }}</td>
+          <td class="col-hide-600">{{ $team->wins }}</td>
+          <td class="col-hide-600">{{ $team->draws }}</td>
+          <td class="col-hide-600">{{ $team->losses }}</td>
+          <td class="col-hide-600 col-goals">{{ $team->goals_for }} : {{ $team->goals_against }}</td>
+          <td class="col-hide-600">{{ $team->goals_for - $team->goals_against }}</td>
           <td>{{ $team->points }}</td>
           <td>
             @if(in_array($team->club_id, $favouriteClubIds))

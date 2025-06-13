@@ -18,7 +18,7 @@
     <div class="menu">
       <a href="{{ route('leagues') }}">Przeglądaj</a>
       <a href="{{ route('matches') }}">Mecze</a>
-      <a href="{{ route('favourite_clubs') }}">Ulubione kluby</a>
+      <a href="{{ route('favourite_clubs') }}">Ulubione</a>
       <form method="POST" action="{{ route('logout') }}" style="display:inline;">
         @csrf
         <button type="submit" class="menu-link" style="background:none;border:none;padding:0;margin:0;color:inherit;cursor:pointer;font:inherit;">

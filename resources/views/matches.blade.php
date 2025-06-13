@@ -6,21 +6,21 @@
     <table class="standings-table">
         <thead>
             <tr>
-                <th>Rozgrywki</th>
+                <th class="col-hide-600 col-hide-380">Rozgrywki</th>
                 <th>Gospodarz</th>
                 <th>Gość</th>
-                <th>Faza</th>
+                <th class="col-hide-380">Faza</th>
                 <th>Data</th>
             </tr>
         </thead>
         <tbody>
             @forelse ($upcomingMatches as $match)
                 <tr class="clickable-row" data-href="{{ route('match_details', ['id' => $match->match_id]) }}" style="cursor:pointer;">
-                    <td>{{ $match->league_name }}</td>
-                    <td>{{ $match->club1_name }}</td>
-                    <td>{{ $match->club2_name }}</td>
-                    <td>{{ $match->level_of_play }}</td>
-                    <td>{{ \Carbon\Carbon::parse($match->match_date)->format('Y-m-d') }}</td>
+                    <td class="col-hide-600 col-hide-380" data-label="Rozgrywki">{{ $match->league_name }}</td>
+                    <td data-label="Gospodarz">{{ $match->club1_name }}</td>
+                    <td data-label="Gość">{{ $match->club2_name }}</td>
+                    <td class="col-hide-380" data-label="Faza">{{ $match->level_of_play }}</td>
+                    <td data-label="Data">{{ \Carbon\Carbon::parse($match->match_date)->format('Y-m-d') }}</td>
                 </tr>
             @empty
                 <tr>
@@ -36,29 +36,29 @@
     <table class="standings-table">
         <thead>
             <tr>
-                <th>Rozgrywki</th>
+                <th class="col-hide-600 col-hide-380">Rozgrywki</th>
                 <th>Gospodarz</th>
                 <th>Gość</th>
-                <th>Faza</th>
+                <th class="col-hide-380">Faza</th>
+                <th class="col-hide-380">Data</th>
                 <th>Wynik</th>
-                <th>Data</th>
             </tr>
         </thead>
         <tbody>
             @forelse ($pastMatches as $match)
                 <tr class="clickable-row" data-href="{{ route('match_details', ['id' => $match->match_id]) }}" style="cursor:pointer;">
-                    <td>{{ $match->league_name }}</td>
-                    <td>{{ $match->club1_name }}</td>
-                    <td>{{ $match->club2_name }}</td>
-                    <td>{{ $match->level_of_play }}</td>
-                    <td>
+                    <td class="col-hide-600 col-hide-380" data-label="Rozgrywki">{{ $match->league_name }}</td>
+                    <td data-label="Gospodarz">{{ $match->club1_name }}</td>
+                    <td data-label="Gość">{{ $match->club2_name }}</td>
+                    <td class="col-hide-380" data-label="Faza">{{ $match->level_of_play }}</td>
+                    <td class="col-hide-380" data-label="Data">{{ \Carbon\Carbon::parse($match->match_date)->format('Y-m-d') }}</td>
+                    <td data-label="Wynik">
                         @if(isset($match->club_result_1) && isset($match->club_result_2))
                             {{ $match->club_result_1 }} : {{ $match->club_result_2 }}
                         @else
                             -
                         @endif
                     </td>
-                    <td>{{ \Carbon\Carbon::parse($match->match_date)->format('Y-m-d') }}</td>
                 </tr>
             @empty
                 <tr>

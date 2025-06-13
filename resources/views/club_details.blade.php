@@ -18,21 +18,21 @@
     <table class="standings-table">
         <thead>
             <tr>
-                <th>Rozgrywki</th>
+                <th class="col-hide-600 col-hide-380">Rozgrywki</th>
                 <th>Gospodarz</th>
                 <th>Gość</th>
-                <th>Faza</th>
+                <th class="col-hide-380">Faza</th>
                 <th>Data</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($upcomingMatches as $match)
                 <tr class="clickable-row" data-href="{{ route('match_details', ['id' => $match->match_id]) }}" style="cursor:pointer;">
-                    <td>{{ $match->league_name }}</td>
-                    <td>{{ $match->club1_name }}</td>
-                    <td>{{ $match->club2_name }}</td>
-                    <td>{{ $match->level_of_play }}</td>
-                    <td>{{ \Carbon\Carbon::parse($match->match_date)->format('Y-m-d') }}</td>
+                    <td class="col-hide-600 col-hide-380" data-label="Rozgrywki">{{ $match->league_name }}</td>
+                    <td data-label="Gospodarz">{{ $match->club1_name }}</td>
+                    <td data-label="Gość">{{ $match->club2_name }}</td>
+                    <td class="col-hide-380" data-label="Faza">{{ $match->level_of_play }}</td>
+                    <td data-label="Data">{{ \Carbon\Carbon::parse($match->match_date)->format('Y-m-d') }}</td>
                 </tr>
             @endforeach
         </tbody>
@@ -50,23 +50,23 @@
     <table class="standings-table">
         <thead>
             <tr>
-                <th>Rozgrywki</th>
+                <th class="col-hide-600 col-hide-380">Rozgrywki</th>
                 <th>Gospodarz</th>
                 <th>Gość</th>
-                <th>Faza</th>
-                <th>Data</th>
+                <th class="col-hide-380">Faza</th>
+                <th class="col-hide-380 col-hide-600">Data</th>
                 <th>Wynik</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($pastMatches as $match)
                 <tr class="clickable-row" data-href="{{ route('match_details', ['id' => $match->match_id]) }}" style="cursor:pointer;">
-                    <td>{{ $match->league_name }}</td>
-                    <td>{{ $match->club1_name }}</td>
-                    <td>{{ $match->club2_name }}</td>
-                    <td>{{ $match->level_of_play }}</td>
-                    <td>{{ \Carbon\Carbon::parse($match->match_date)->format('Y-m-d') }}</td>
-                    <td>{{ $match->club_result_1 }} : {{ $match->club_result_2 }}</td>
+                    <td class="col-hide-600 col-hide-380" data-label="Rozgrywki">{{ $match->league_name }}</td>
+                    <td data-label="Gospodarz">{{ $match->club1_name }}</td>
+                    <td data-label="Gość">{{ $match->club2_name }}</td>
+                    <td class="col-hide-380" data-label="Faza">{{ $match->level_of_play }}</td>
+                    <td class="col-hide-380 col-hide-600" data-label="Data">{{ \Carbon\Carbon::parse($match->match_date)->format('Y-m-d') }}</td>
+                    <td data-label="Wynik">{{ $match->club_result_1 }} : {{ $match->club_result_2 }}</td>
                 </tr>
             @endforeach
         </tbody>
@@ -86,21 +86,21 @@
                 <th>Nazwisko</th>
                 <th>Mecze</th>
                 <th>Bramki</th>
-                <th>Asysty</th>
-                <th>🟨</th>
-                <th>🟥</th>
+                <th class="col-hide-600 col-hide-380">Asysty</th>
+                <th class="col-hide-600 col-hide-380">🟨</th>
+                <th class="col-hide-600 col-hide-380">🟥</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($players as $player)
                 <tr class="clickable-row" data-href="{{ route('player_details', ['id' => $player->player_id]) }}" style="cursor:pointer;">
-                    <td>{{ $player->name }}</td>
-                    <td>{{ $player->surname }}</td>
-                    <td>{{ $player->number_of_matches_played ?? 0 }}</td>
-                    <td>{{ $player->goals ?? 0 }}</td>
-                    <td>{{ $player->assists ?? 0 }}</td>
-                    <td>{{ $player->yellow_cards ?? 0 }}</td>
-                    <td>{{ $player->red_cards ?? 0 }}</td>
+                    <td data-label="Imię">{{ $player->name }}</td>
+                    <td data-label="Nazwisko">{{ $player->surname }}</td>
+                    <td data-label="Mecze">{{ $player->number_of_matches_played ?? 0 }}</td>
+                    <td data-label="Bramki">{{ $player->goals ?? 0 }}</td>
+                    <td class="col-hide-600 col-hide-380" data-label="Asysty">{{ $player->assists ?? 0 }}</td>
+                    <td class="col-hide-600 col-hide-380" data-label="🟨">{{ $player->yellow_cards ?? 0 }}</td>
+                    <td class="col-hide-600 col-hide-380" data-label="🟥">{{ $player->red_cards ?? 0 }}</td>
                 </tr>
             @endforeach
         </tbody>

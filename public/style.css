@@ -248,3 +248,50 @@ nav[role="navigation"] .inline-flex svg {
         order: 3 !important;
     }
 }
+
+/* Do 600px ukryj kolumny z klasą col-hide-600 */
+@media (max-width: 600px) {
+  .col-hide-600,
+  .standings-table th.col-hide-600,
+  .standings-table td.col-hide-600 {
+    display: none !important;
+  }
+}
+
+/* Do 380px ukryj kolumny z klasą col-hide-380 */
+@media (max-width: 380px) {
+  .col-hide-380,
+  .standings-table th.col-hide-380,
+  .standings-table td.col-hide-380 {
+    display: none !important;
+  }
+}
+
+/* Navbar responsive for <770px */
+@media (max-width: 770px) {
+  .navbar {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .navbar .logo {
+    order: 1;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+  }
+  .navbar .menu {
+    order: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+  }
+  .navbar .menu a,
+  .navbar .menu form {
+    margin: 0;
+  }
+}

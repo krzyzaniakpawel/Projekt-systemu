@@ -2,23 +2,25 @@
 @section('content')
 
 <div style="display: flex; justify-content: center; margin-top: 2rem;">
-    <div class="info-card match-card-flex">
-        <!-- Logo klubu 1 -->
+    <div class="info-card match-card-flex" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0;">
+        <!-- Klub 1 -->
         <div class="match-card-club club1" style="flex: 1 1 0; display: flex; flex-direction: column; align-items: center; min-width: 120px; max-width: 180px;">
-            @if($match->club1_logo)
-                <img src="data:image/png;base64,{{ base64_encode($match->club1_logo) }}" alt="Logo klubu 1" style="height: 90px; width: 90px; object-fit: contain; border-radius: 10px; background: #f8f8f8;">
-            @else
-                <div style="height: 90px; width: 90px; background: #eee; display: flex; align-items: center; justify-content: center; border-radius: 10px; color: #888;">
-                    Brak logo
+            <a href="{{ route('club_details', ['id' => $match->club1_id]) }}" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
+                @if($match->club1_logo)
+                    <img src="data:image/png;base64,{{ base64_encode($match->club1_logo) }}" alt="Logo klubu 1" style="height: 90px; width: 90px; object-fit: contain; border-radius: 10px; background: #f8f8f8;">
+                @else
+                    <div style="height: 90px; width: 90px; background: #eee; display: flex; align-items: center; justify-content: center; border-radius: 10px; color: #888;">
+                        Brak logo
+                    </div>
+                @endif
+                <div style="margin-top: 0.5rem; text-align: center; max-width: 140px; word-break: break-word; font-weight: 500;">
+                    {{ $match->club1_name }}
                 </div>
-            @endif
-            <div style="margin-top: 0.5rem; text-align: center; max-width: 140px; word-break: break-word; font-weight: 500;">
-                {{ $match->club1_name }}
-            </div>
+            </a>
         </div>
 
         <!-- Wynik i data -->
-        <div class="match-card-center" style="flex: 0 0 180px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div class="match-card-center" style="flex: 0 0 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 100px;">
             <div style="font-size: 1.1em; color: #888; margin-bottom: 0.5rem;">
                 {{ \Carbon\Carbon::parse($match->match_date)->format('Y-m-d') }}
             </div>
@@ -27,18 +29,20 @@
             </div>
         </div>
 
-        <!-- Logo klubu 2 -->
+        <!-- Klub 2 -->
         <div class="match-card-club club2" style="flex: 1 1 0; display: flex; flex-direction: column; align-items: center; min-width: 120px; max-width: 180px;">
-            @if($match->club2_logo)
-                <img src="data:image/png;base64,{{ base64_encode($match->club2_logo) }}" alt="Logo klubu 2" style="height: 90px; width: 90px; object-fit: contain; border-radius: 10px; background: #f8f8f8;">
-            @else
-                <div style="height: 90px; width: 90px; background: #eee; display: flex; align-items: center; justify-content: center; border-radius: 10px; color: #888;">
-                    Brak logo
+            <a href="{{ route('club_details', ['id' => $match->club2_id]) }}" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
+                @if($match->club2_logo)
+                    <img src="data:image/png;base64,{{ base64_encode($match->club2_logo) }}" alt="Logo klubu 2" style="height: 90px; width: 90px; object-fit: contain; border-radius: 10px; background: #f8f8f8;">
+                @else
+                    <div style="height: 90px; width: 90px; background: #eee; display: flex; align-items: center; justify-content: center; border-radius: 10px; color: #888;">
+                        Brak logo
+                    </div>
+                @endif
+                <div style="margin-top: 0.5rem; text-align: center; max-width: 140px; word-break: break-word; font-weight: 500;">
+                    {{ $match->club2_name }}
                 </div>
-            @endif
-            <div style="margin-top: 0.5rem; text-align: center; max-width: 140px; word-break: break-word; font-weight: 500;">
-                {{ $match->club2_name }}
-            </div>
+            </a>
         </div>
     </div>
 </div>

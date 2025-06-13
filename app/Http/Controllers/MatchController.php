@@ -37,7 +37,9 @@ class MatchController extends Controller
                 'c1.name as club1_name',
                 'c1.crest as club1_logo',
                 'c2.name as club2_name',
-                'c2.crest as club2_logo'
+                'c2.crest as club2_logo',
+                'c1.club_id as club1_id',
+                'c2.club_id as club2_id'
             )
             ->where('m.match_id', $id)
             ->first();

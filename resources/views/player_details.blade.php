@@ -23,4 +23,22 @@
     </div>
 </div>
 
+<style>
+@media (max-width: 700px) {
+  .info-card {
+    margin-left: 6px !important;
+    margin-right: 6px !important;
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    max-width: 100% !important;
+    width: auto !important;
+    box-sizing: border-box;
+  }
+}
+</style>
+
 @endsection
