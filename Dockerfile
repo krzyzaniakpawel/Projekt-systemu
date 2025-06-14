@@ -53,6 +53,9 @@ RUN apt-get update && apt-get install -y \
     && echo 'instantclient,/opt/oracle/instantclient' | pecl install oci8 \
     && docker-php-ext-enable oci8
 
+# Instalacja Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
 # Konfiguracja Apache
 RUN a2enmod rewrite
 COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
@@ -70,8 +73,7 @@ COPY --from=frontend /app/public/build ./public/build
 RUN composer install --no-dev --optimize-autoloader
 
 # Prawa do storage, bootstrap itd.
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 storage bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html   
 
 # Ustaw zmienną środowiskową do środowiska produkcyjnego
 ENV APP_ENV=production
