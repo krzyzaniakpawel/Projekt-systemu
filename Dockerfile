@@ -1,3 +1,14 @@
+# Etap 1: Budowanie assets (JS, CSS) z Node.js
+FROM node:18 AS frontend
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build
+
 FROM php:8.2-apache
 
 # Oracle Instant Client Download links
@@ -52,5 +63,19 @@ WORKDIR /var/www/html
 # Skopiuj aplikację
 COPY . .
 
+# Skopiuj zbudowane assets z etapu 1
+COPY --from=frontend /app/public/build ./public/build
+
+# Instalacja zależności PHP (Laravel)
+RUN composer install --no-dev --optimize-autoloader
+
+# Prawa do storage, bootstrap itd.
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 storage bootstrap/cache
+
+# Ustaw zmienną środowiskową do środowiska produkcyjnego
+ENV APP_ENV=production
 
 EXPOSE 80
+
+CMD ["apache2-foreground"]
