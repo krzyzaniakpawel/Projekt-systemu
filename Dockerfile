@@ -42,4 +42,15 @@ RUN apt-get update && apt-get install -y \
     && echo 'instantclient,/opt/oracle/instantclient' | pecl install oci8 \
     && docker-php-ext-enable oci8
 
+# Konfiguracja Apache
+RUN a2enmod rewrite
+COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
+
+# Ustaw katalog roboczy
+WORKDIR /var/www/html
+
+# Skopiuj aplikację
+COPY . .
+
+
 EXPOSE 80
